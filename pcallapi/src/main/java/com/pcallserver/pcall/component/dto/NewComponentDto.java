@@ -17,6 +17,5 @@ public class NewComponentDto {
     private double price;
     private int releaseYear;
     private int stock;
-    private String image;
 
 }

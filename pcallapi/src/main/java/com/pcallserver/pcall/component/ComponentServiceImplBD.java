@@ -29,6 +29,11 @@ public class ComponentServiceImplBD implements ComponentService {
         return componentRepository.save(component);
     }
 
+    public String generateComponentImgId(Component component) {
+        String imageName = component.getModel().toLowerCase().replace(" ", "_");
+        return imageName;
+    }
+
     @Override
     public Component addComponentDto(NewComponentDto componentDto) {
         //Planteado para que se pueda agregar un componente con los valores de los enums en formato String
@@ -42,6 +47,7 @@ public class ComponentServiceImplBD implements ComponentService {
         component.setBrand(ComponentDtoUtils.getEnumValue(ComponentBrand.class, componentDto.getBrand()));
         component.setCategory(ComponentDtoUtils.getEnumValue(ComponentCategory.class, componentDto.getCategory()));
         component.setState(ComponentDtoUtils.getEnumValue(ComponentState.class, componentDto.getState()));
+        component.setImage(generateComponentImgId(component));
         
         return componentRepository.save(component);
     }

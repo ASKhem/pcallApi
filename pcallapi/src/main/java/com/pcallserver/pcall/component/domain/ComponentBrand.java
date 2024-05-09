@@ -10,5 +10,11 @@ public enum ComponentBrand {
     BeQuiet,
     Seasonic,
     Noctua, DeepCool,
-    Nvidia
+    Nvidia,
+    GSkill,
+    Crucial,
+    Fractal,
+    LianLi,
+    Thermaltake,
+    QNAP
 }
