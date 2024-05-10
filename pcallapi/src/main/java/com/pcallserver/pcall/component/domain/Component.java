@@ -22,7 +22,6 @@ public class Component {
     private String details;
     private ComponentState state;
     private double price;
-    private int onSale;
     private int releaseYear;
     private int stock;
     private String image;

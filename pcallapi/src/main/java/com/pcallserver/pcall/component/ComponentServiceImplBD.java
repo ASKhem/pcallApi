@@ -87,6 +87,11 @@ public class ComponentServiceImplBD implements ComponentService {
         ComponentInfo componentDto = modelMapper.map(component, ComponentInfo.class);
         componentDto.setStock(stock);
         return componentDto; 
-    } 
+    }
+
+    @Override
+    public List<Component> findByCategory(ComponentCategory category) {
+        return componentRepository.findByCategory(category);
+    }
 
 }

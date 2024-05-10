@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pcallserver.pcall.component.componentStorage.ComponentStock;
 import com.pcallserver.pcall.component.componentStorage.ComponentStockService;
 import com.pcallserver.pcall.component.domain.Component;
+import com.pcallserver.pcall.component.domain.ComponentCategory;
 import com.pcallserver.pcall.component.dto.EditComponentDto;
 import com.pcallserver.pcall.component.dto.NewComponentDto;
 
@@ -34,6 +35,12 @@ public class ComponentController {
     public ResponseEntity<?> getComponentsList() {
         List<Component> components = componentService.getComponents();
         System.out.println(components);
+        return ResponseEntity.ok(components);
+    }
+
+    @GetMapping("/list/{category}")
+    public ResponseEntity<?> getComponentsByCategory(@PathVariable ComponentCategory category){
+        List<Component> components = componentService.findByCategory(category);
         return ResponseEntity.ok(components);
     }
 
