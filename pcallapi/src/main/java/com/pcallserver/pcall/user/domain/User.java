@@ -2,33 +2,41 @@ package com.pcallserver.pcall.user.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
-@NoArgsConstructor
+@Entity
 @AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Table(name = "pcallUser")
 public class User {
-    @Id
-    @GeneratedValue
-    private Long id;
-    @NotNull
-    private String userName;
-    @NotNull
-    private String password;
-    @Email
-    private String email;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    //Billing information
-    private String bankName;
-    private String accountNumber;
-    private String billingAddress;
+  @NotBlank
+  @Size(max = 20)
+  private String username;
+
+  @NotBlank
+  @Size(max = 50)
+  @Email
+  private String email;
+
+  @NotBlank
+  @Size(max = 120)
+  private String password;
+
+  private Rol rol;
 
 }

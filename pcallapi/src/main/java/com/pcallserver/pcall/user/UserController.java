@@ -18,8 +18,8 @@ public class UserController {
 
     @PostMapping("/create")
     public ResponseEntity<?> createUser(@RequestBody User user){
-        User createdUser = userService.createUser(user);
-        return ResponseEntity.ok(createdUser);
+        User newUser = userService.createUser(user);
+        return ResponseEntity.ok(newUser);
     }
 
     @GetMapping("/get/{id}")

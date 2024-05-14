@@ -9,4 +9,7 @@ public interface UserService {
     public User updateUser(User user);
     public void deleteUser(Long id);
     public User convertNewDto(NewUserDto newUserDto);
+    public User findByName(String name);
+    public String getCurrentUserRole();
+    public boolean isAdmin();
 }

@@ -9,6 +9,9 @@ import com.pcallserver.pcall.component.ComponentService;
 import com.pcallserver.pcall.component.componentStorage.ComponentStock;
 import com.pcallserver.pcall.component.componentStorage.ComponentStockService;
 import com.pcallserver.pcall.component.dto.NewComponentDto;
+import com.pcallserver.pcall.user.UserService;
+import com.pcallserver.pcall.user.domain.Rol;
+import com.pcallserver.pcall.user.domain.User;
 
 @SpringBootApplication
 public class PcallApplication {
@@ -18,7 +21,7 @@ public class PcallApplication {
 	}
 
 	@Bean
-	CommandLineRunner initData(ComponentService componentService, ComponentStockService stockService){
+	CommandLineRunner initData(ComponentService componentService, ComponentStockService stockService, UserService userService){
 		return args -> {
 			
 			//Componente CPU
@@ -294,6 +297,13 @@ public class PcallApplication {
 				componentService.addComponentDto(new NewComponentDto( "Sound_Card", "Asus", "Strix Soar", " ", "NEW", 118.99d, 2024, 10));
 				stockService.createStock(new ComponentStock(87L, 10));
 				componentService.addComponentDto(new NewComponentDto( "Sound_Card", "Asus", "Xonar AE", " ", "NEW", 59.99d, 2024, 10));
+				stockService.createStock(new ComponentStock(88L, 10));
+
+				User user = new User(0L, "admin1", "admin@gmail.com", "admin1234", Rol.ADMIN);
+				userService.createUser(user);
+				System.out.println(userService.getUser(1L));
+
+
 		};	
 	}
 
