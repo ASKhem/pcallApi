@@ -25,7 +25,6 @@ public class PcallApplication {
 			//AMD
 				componentService.addComponentDto(new NewComponentDto( "CPU", "AMD", "Ryzen 7 7800X3D", " ", "NEW", 549.0d, 2024, 10));
 				stockService.createStock(new ComponentStock(1L, 10));
-				System.out.println(componentService.getComponents());
 				componentService.addComponentDto(new NewComponentDto( "CPU", "AMD", "Ryzen 5 7600X", " ", "NEW", 234.0d, 2023, 10));
 				stockService.createStock(new ComponentStock(2L, 10));
 				componentService.addComponentDto(new NewComponentDto( "CPU", "AMD", "Ryzen 9 7900X", " ", "NEW", 399.0d, 2023, 10));
@@ -40,7 +39,6 @@ public class PcallApplication {
 			//Intel
 				componentService.addComponentDto(new NewComponentDto( "CPU", "Intel", "Core i5-12400F", " ", "NEW", 137.99d, 2024, 10	));
 				stockService.createStock(new ComponentStock(7L, 10));
-				System.out.println(componentService.getComponents());
 				componentService.addComponentDto(new NewComponentDto( "CPU", "Intel", "Core i5-12600", " ", "NEW", 234.0d, 2023, 10	));
 				stockService.createStock(new ComponentStock(8L, 10));
 				componentService.addComponentDto(new NewComponentDto( "CPU", "Intel", "Core i7-14700", " ", "NEW", 440.98d, 2023, 10	));
@@ -57,7 +55,6 @@ public class PcallApplication {
 			//Asus
 				componentService.addComponentDto(new NewComponentDto( "GPU", "Asus", "Dual GeForce RTX 4070 SUPER EVO OC Edition", "12GB GDDR6X DLSS3", "NEW", 709.0d, 2024, 10	));
 				stockService.createStock(new ComponentStock(13L, 10));
-				System.out.println(componentService.getComponents());
 				componentService.addComponentDto(new NewComponentDto( "GPU", "Asus", "Dual GeForce RTX 4060 White OC Edition", "8GB GDDR6 DLSS3", "NEW", 350.98d, 2024, 10));
 				stockService.createStock(new ComponentStock(14L, 10));
 				componentService.addComponentDto(new NewComponentDto( "GPU", "Asus", "Dual Radeon RX 6700 XT OC Edition", "12GB GDDR6", "NEW", 784.56d, 2024, 10));

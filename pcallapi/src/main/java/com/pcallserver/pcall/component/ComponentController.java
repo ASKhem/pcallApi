@@ -34,7 +34,6 @@ public class ComponentController {
     @GetMapping("/list")
     public ResponseEntity<?> getComponentsList() {
         List<Component> components = componentService.getComponents();
-        System.out.println(components);
         return ResponseEntity.ok(components);
     }
 
