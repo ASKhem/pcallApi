@@ -46,17 +46,16 @@ public class SecurityConfig {
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
-
+ 
   @Bean
+
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
     http.csrf(csrf -> csrf.disable())
         .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .authorizeHttpRequests(auth -> auth.requestMatchers("/api/auth/**").permitAll()
-            .requestMatchers("/api/test/all").permitAll()
-            .requestMatchers("/api/test/user").hasAnyRole("USER", "EDITOR", "ADMIN")
-            .requestMatchers("/api/test/mod").hasAnyRole("EDITOR", "ADMIN")
-            .requestMatchers("/api/test/admin").hasAnyRole("ADMIN")
+        .authorizeHttpRequests(auth -> auth.requestMatchers("/api/**").permitAll()
+            .requestMatchers("/admin/**").hasAnyRole("ADMIN")
             .requestMatchers("/component/**").permitAll()
             .requestMatchers("/images/**").permitAll());
     http.authenticationProvider(authenticationProvider());

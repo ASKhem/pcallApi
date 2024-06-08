@@ -9,7 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EditComponentDto {
 
+    private String category;
+    private String brand;
+    private String model;
     private String details;
     private double price;
-    private String image;
+    private int releaseYear;
+    private int stock;
 }

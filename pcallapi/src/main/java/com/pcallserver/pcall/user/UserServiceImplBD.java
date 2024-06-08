@@ -9,8 +9,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import com.pcallserver.pcall.security.JwtUtils;
 import com.pcallserver.pcall.user.domain.User;
 import com.pcallserver.pcall.user.dto.NewUserDto;
+import com.pcallserver.pcall.user.dto.UserOrderInfo;
+
+import java.util.List;
 
 @Service
 public class UserServiceImplBD implements UserService {
@@ -24,6 +28,9 @@ public class UserServiceImplBD implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private JwtUtils jwtUtils;
+
     public User createUser(User user) {
         String encryptedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encryptedPassword);
@@ -33,6 +40,10 @@ public class UserServiceImplBD implements UserService {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public List<User> getUsers() {
+        return userRepository.findAll();
     }
 
     public User getUser(Long id) {
@@ -55,7 +66,7 @@ public class UserServiceImplBD implements UserService {
         return userRepository.findByUsername(name);
     }
 
-    public String getCurrentUserRole()  {
+    public String getCurrentUserRole() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             return authentication.getName();
@@ -66,4 +77,17 @@ public class UserServiceImplBD implements UserService {
     public boolean isAdmin() {
         return getCurrentUserRole().equals("[ROLE_ADMIN]");
     }
+
+    @Override
+    public User getUserByToken(String token) {
+        String username = jwtUtils.getUserNameFromJwtToken(token);
+        return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public UserOrderInfo createUserOrderInfo(User user, String phone, String address, String city, String state, String zip, String country) {
+        UserOrderInfo userOrderInfo = new UserOrderInfo(user.getId(), user.getUsername(), user.getEmail(), phone, address, city, state, zip, country);
+        return userOrderInfo;
+    }
+
 }

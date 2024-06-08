@@ -4,20 +4,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ReceiptServiceImplBD implements ReceiptService {
+public class OrderServiceImplBD implements OrderService {
     @Autowired
-    ReceiptRepository receiptRepository;
+    OrderRepository receiptRepository;
 
-    public Receipt createReceipt(Receipt receipt) {
+    public Order createReceipt(Order receipt) {
         return receiptRepository.save(receipt);
     }
 
-    public Receipt getReceipt(Long id) {
+    public Order getReceipt(Long id) {
         return receiptRepository.findById(id).orElse(null);
         
     }
 
-    public Receipt updateReceipt(Receipt receipt) {
+    public Order updateReceipt(Order receipt) {
         return receiptRepository.save(receipt);
     }
 

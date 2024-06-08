@@ -15,26 +15,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
 @RequestMapping("/receipt")
-public class ReceiptController {
+public class OrderController {
     @Autowired
-    public ReceiptService receiptService;
+    public OrderService receiptService;
 
     @GetMapping("/get/{id}")
     public ResponseEntity<?> getReceipt(@PathVariable Long id){
-        Receipt receipt = receiptService.getReceipt(id);
+        Order receipt = receiptService.getReceipt(id);
         return ResponseEntity.ok(receipt);
     }
 
+
+    
     @PostMapping("/add")
-    public ResponseEntity<?> addReceipt(@RequestBody Receipt receipt){
-        Receipt newReceipt = receiptService.createReceipt(receipt);
+    public ResponseEntity<?> addReceipt(@RequestBody Order receipt){
+        Order newReceipt = receiptService.createReceipt(receipt);
         return ResponseEntity.status(HttpStatus.CREATED).body(newReceipt);
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<?> editReceipt(@PathVariable Long id, @RequestBody Receipt receipt){
+    public ResponseEntity<?> editReceipt(@PathVariable Long id, @RequestBody Order receipt){
         receipt.setId(id);
-        Receipt updatedReceipt = receiptService.updateReceipt(receipt);
+        Order updatedReceipt = receiptService.updateReceipt(receipt);
         return ResponseEntity.ok(updatedReceipt);
     }
 
