@@ -7,6 +7,9 @@ import com.pcallserver.pcall.component.domain.ComponentCategory;
 import com.pcallserver.pcall.component.dto.EditComponentDto;
 import com.pcallserver.pcall.component.dto.ComponentInfo;
 import com.pcallserver.pcall.component.dto.NewComponentDto;
+import com.pcallserver.pcall.receipt.NewOrderDto;
+import com.pcallserver.pcall.receipt.Order;
+
 
 public interface ComponentService {
     public Component addComponent(Component component);
@@ -18,5 +21,6 @@ public interface ComponentService {
     public void delete(Long id);
     public ComponentInfo convertToComponentDto(Long id, int stock);
     public List<Component> findByCategory(ComponentCategory category);
+    public Order convertToEntity(NewOrderDto newOrderDto);
 } 
  

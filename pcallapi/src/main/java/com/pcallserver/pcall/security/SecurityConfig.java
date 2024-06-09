@@ -46,7 +46,7 @@ public class SecurityConfig {
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
- 
+
   @Bean
 
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -54,7 +54,8 @@ public class SecurityConfig {
     http.csrf(csrf -> csrf.disable())
         .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .authorizeHttpRequests(auth -> auth.requestMatchers("/api/**").permitAll()
+        .authorizeHttpRequests(auth -> auth.requestMatchers("/api/**", "/admin/components/list/**").permitAll()
+            .requestMatchers("/admin/users/userinfo").hasAnyRole("USER", "ADMIN")
             .requestMatchers("/admin/**").hasAnyRole("ADMIN")
             .requestMatchers("/component/**").permitAll()
             .requestMatchers("/images/**").permitAll());

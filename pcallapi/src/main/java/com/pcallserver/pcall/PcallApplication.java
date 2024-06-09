@@ -388,20 +388,22 @@ public class PcallApplication {
 					new NewComponentDto("Sound_Card", "Asus", "Xonar AE", " ", "NEW", 59.99d, 2024, 10));
 			stockService.createStock(new ComponentStock(88L, 10));
 
-			User user = new User(0L, "admin1", "admin@gmail.com", "admin1234",
+			User user = new User(1L, "admin1", "admin@gmail.com", "admin1234",
 					"http://localhost:9090/images/profile/defaultProfile.png", Rol.ADMIN);
 			userService.createUser(user);
 			System.out.println(userService.getUser(1L));
 
-			User user2 = new User(1L, "user1", "user1@gmail.com", "user1234",
+			User user2 = new User(2L, "user1", "user1@gmail.com", "user1234",
 					"http://localhost:9090/images/profile/defaultProfile.png", Rol.USER);
 			userService.createUser(user2);
 
-			User user3 = new User(0L, "admin2", "admin2@gmail.com", "admin4321",
+			User user3 = new User(3L, "admin2", "admin2@gmail.com", "admin4321",
 					"http://localhost:9090/images/profile/defaultProfile.png", Rol.ADMIN);
 			userService.createUser(user3);
 
-			
+			User user4 = new User(4L, "user2", "user2@gmail.com", "user2345",
+					"http://localhost:9090/images/profile/defaultProfile.png", Rol.USER);
+			userService.createUser(user4);
 
 		};
 	}

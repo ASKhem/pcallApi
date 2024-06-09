@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import com.pcallserver.pcall.security.JwtUtils;
 import com.pcallserver.pcall.user.domain.User;
 import com.pcallserver.pcall.user.dto.NewUserDto;
-import com.pcallserver.pcall.user.dto.UserOrderInfo;
 
 import java.util.List;
 
@@ -82,12 +81,6 @@ public class UserServiceImplBD implements UserService {
     public User getUserByToken(String token) {
         String username = jwtUtils.getUserNameFromJwtToken(token);
         return userRepository.findByUsername(username);
-    }
-
-    @Override
-    public UserOrderInfo createUserOrderInfo(User user, String phone, String address, String city, String state, String zip, String country) {
-        UserOrderInfo userOrderInfo = new UserOrderInfo(user.getId(), user.getUsername(), user.getEmail(), phone, address, city, state, zip, country);
-        return userOrderInfo;
     }
 
 }

@@ -1,21 +1,25 @@
 package com.pcallserver.pcall.receipt;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import com.pcallserver.pcall.component.domain.Component;
+import com.pcallserver.pcall.user.domain.User;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
 
 @Data
 @NoArgsConstructor
@@ -23,16 +27,26 @@ import java.util.ArrayList;
 @EqualsAndHashCode(of = "id")
 @Entity
 public class Order {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userId;
+    @ManyToOne
+    private User user;
 
     @ManyToMany
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private ArrayList<Component> pc;
+    private List<Component> pc;
 
     private double price;
 
     private LocalDate deliveryDate;
+
+    private String phone;
+    private String address;
+    private String city;
+    private String state;
+    private String zip;
+    private String country;
 }
