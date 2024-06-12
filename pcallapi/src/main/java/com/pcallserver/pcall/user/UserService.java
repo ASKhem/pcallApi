@@ -26,4 +26,6 @@ public interface UserService {
     public boolean isAdmin();
 
     public User getUserByToken(String token);
+
+    public User findByEmail(String email);
 }

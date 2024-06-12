@@ -55,7 +55,8 @@ public class SecurityConfig {
         .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth -> auth.requestMatchers("/api/**", "/admin/components/list/**").permitAll()
-            .requestMatchers("/admin/users/userinfo").hasAnyRole("USER", "ADMIN")
+            .requestMatchers("/admin/users/userinfo", "/admin/orders/create", "/admin/orders/getByEmail/**")
+            .hasAnyRole("USER", "ADMIN")
             .requestMatchers("/admin/**").hasAnyRole("ADMIN")
             .requestMatchers("/component/**").permitAll()
             .requestMatchers("/images/**").permitAll());

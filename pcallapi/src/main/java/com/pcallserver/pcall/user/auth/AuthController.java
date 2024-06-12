@@ -83,7 +83,7 @@ public class AuthController {
         User user = new User(null, signUpRequest.getUserName(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()),
-                "http://localhost:9090/images/profile/default.png",
+                "http://localhost:9090/images/profile/defaultProfile.png",
                 Rol.USER);
         userRepository.save(user);
         System.out.println("User registered: " + user);

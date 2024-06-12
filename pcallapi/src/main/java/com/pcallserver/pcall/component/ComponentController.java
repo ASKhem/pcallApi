@@ -49,9 +49,9 @@ public class ComponentController {
         return ResponseEntity.ok(component);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/create")
     public ResponseEntity<?> addComponent(@RequestBody NewComponentDto newComponent) {
-        Component component = componentService.addComponentDto(newComponent);
+        Component component = componentService.addGenericComponentDto(newComponent);
         stockService.createStock(new ComponentStock(component.getId(), component.getStock()));
         return ResponseEntity.status(HttpStatus.CREATED).body(component);
     }

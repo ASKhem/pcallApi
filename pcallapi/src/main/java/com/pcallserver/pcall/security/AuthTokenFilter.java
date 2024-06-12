@@ -1,6 +1,5 @@
 package com.pcallserver.pcall.security;
 
-
 import java.io.IOException;
 
 import jakarta.servlet.FilterChain;
@@ -32,17 +31,25 @@ public class AuthTokenFilter extends OncePerRequestFilter {
       throws ServletException, IOException {
     try {
       String jwt = parseJwt(request);
-      if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
-        String username = jwtUtils.getUserNameFromJwtToken(jwt);
+      if (jwt != null) {
+        logger.info("JWT Token: " + jwt);
+        if (jwtUtils.validateJwtToken(jwt)) {
+          String username = jwtUtils.getUserNameFromJwtToken(jwt);
+          logger.info("Username from JWT: " + username);
 
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-            userDetails,
-            null,
-            userDetails.getAuthorities());
-        authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+          UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+          UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+              userDetails,
+              null,
+              userDetails.getAuthorities());
+          authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+          SecurityContextHolder.getContext().setAuthentication(authentication);
+        } else {
+          logger.warn("Invalid JWT Token");
+        }
+      } else {
+        logger.warn("JWT Token is null");
       }
     } catch (Exception e) {
       logger.error("Cannot set user authentication: {}", e);
