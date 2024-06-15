@@ -13,7 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.pcallserver.pcall.user.UserService;
 import com.pcallserver.pcall.user.domain.User;
+
+import jakarta.validation.Valid;
+
 import com.pcallserver.pcall.component.ComponentService;
+import com.pcallserver.pcall.component.componentStorage.ComponentStockService;
 import java.util.List;
 
 @RestController
@@ -28,6 +32,9 @@ public class PurchaseOrderController {
     @Autowired
     public ComponentService componentService;
 
+    @Autowired
+    public ComponentStockService componentStockService;
+
     @GetMapping("/get/{id}")
     public ResponseEntity<?> getReceipt(@PathVariable Long id) {
         PurchaseOrder purchaseOrder = purchaseOrderService.getReceipt(id);
@@ -41,11 +48,10 @@ public class PurchaseOrderController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> addReceipt(@RequestBody NewOrderDto newOrderDto) {
+    public ResponseEntity<?> addReceipt(@Valid @RequestBody NewOrderDto newOrderDto) {
         User user = userService.findByEmail(newOrderDto.getEmail());
         PurchaseOrder order = componentService.convertToEntity(newOrderDto);
         order.setUser(user);
-        System.out.println("order: " + order);
         PurchaseOrder newReceipt = purchaseOrderService.createReceipt(order);
         return ResponseEntity.status(HttpStatus.CREATED).body(newReceipt);
     }

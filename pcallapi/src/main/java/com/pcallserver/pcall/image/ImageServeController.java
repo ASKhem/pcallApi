@@ -22,7 +22,7 @@ public class ImageServeController {
         try {
             resource = new UrlResource(file.toUri());
         } catch (MalformedURLException e) {
-            // maneja la excepción
+            
         }
 
         return ResponseEntity.ok().body(resource);

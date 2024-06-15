@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.pcallserver.pcall.security.JwtUtils;
 import com.pcallserver.pcall.user.domain.User;
 import com.pcallserver.pcall.user.dto.NewUserDto;
+import com.pcallserver.pcall.user.domain.Rol;
 
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class UserServiceImplBD implements UserService {
     }
 
     public List<User> getUsers() {
-        return userRepository.findAll();
+        return userRepository.findByRole(Rol.USER);
     }
 
     public User getUser(Long id) {

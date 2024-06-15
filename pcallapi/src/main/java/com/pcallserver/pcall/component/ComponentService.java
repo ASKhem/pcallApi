@@ -32,4 +32,5 @@ public interface ComponentService {
     public List<Component> findByCategory(ComponentCategory category);
 
     public PurchaseOrder convertToEntity(NewOrderDto newOrderDto);
+
 }
