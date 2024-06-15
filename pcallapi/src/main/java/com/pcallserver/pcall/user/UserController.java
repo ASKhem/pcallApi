@@ -49,6 +49,13 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteUser(@RequestHeader("Authorization") String token) {
+        String actualToken = token.startsWith("Bearer ") ? token.substring(7) : token;
+        userService.deleteUserByToken(actualToken);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/userinfo")
     public ResponseEntity<?> getUserInfo(@RequestHeader("Authorization") String token) {
         String actualToken = token.startsWith("Bearer ") ? token.substring(7) : token;

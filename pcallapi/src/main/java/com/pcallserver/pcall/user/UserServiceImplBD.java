@@ -89,4 +89,9 @@ public class UserServiceImplBD implements UserService {
         return userRepository.findByEmail(email);
     }
 
+    public void deleteUserByToken(String token) {
+        User user = getUserByToken(token);
+        userRepository.delete(user);
+    }
+
 }
