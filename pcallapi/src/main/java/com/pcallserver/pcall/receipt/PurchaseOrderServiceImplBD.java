@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -21,8 +23,20 @@ public class PurchaseOrderServiceImplBD implements PurchaseOrderService {
     public PurchaseOrder createReceipt(PurchaseOrder purchaseOrder) {
         purchaseOrder.setDelivered(false);
         purchaseOrder.setDeliveryDate(calculateDeliveryDate(purchaseOrder.getCountry()));
+        purchaseOrder.setPrice(calculateTotalPrice(purchaseOrder));
         return purchaseOrderRepository.save(purchaseOrder);
     }
+
+public Double calculateTotalPrice(PurchaseOrder purchaseOrder) {
+    double subtotal = purchaseOrder.getPrice();
+    double services = subtotal * 0.05;
+    double tax = (subtotal + services) * 0.1;
+
+    double total = subtotal + services + tax;
+
+    BigDecimal totalRounded = new BigDecimal(total).setScale(2, RoundingMode.HALF_UP);
+    return totalRounded.doubleValue();
+}
 
     private static final Map<String, Integer> DELIVERY_DAYS_BY_COUNTRY = new HashMap<>();
     static {

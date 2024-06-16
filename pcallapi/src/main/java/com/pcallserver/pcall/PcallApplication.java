@@ -8,6 +8,10 @@ import org.springframework.context.annotation.Bean;
 import com.pcallserver.pcall.component.ComponentService;
 import com.pcallserver.pcall.component.componentStorage.ComponentStockService;
 import com.pcallserver.pcall.user.UserService;
+import com.pcallserver.pcall.component.componentStorage.ComponentStock;
+import com.pcallserver.pcall.component.dto.NewComponentDto;
+import com.pcallserver.pcall.user.domain.User;
+import com.pcallserver.pcall.user.domain.Rol;
 
 @SpringBootApplication
 public class PcallApplication {
