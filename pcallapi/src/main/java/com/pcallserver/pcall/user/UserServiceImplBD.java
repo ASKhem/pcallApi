@@ -81,6 +81,7 @@ public class UserServiceImplBD implements UserService {
     @Override
     public User getUserByToken(String token) {
         String username = jwtUtils.getUserNameFromJwtToken(token);
+        System.out.println(username);
         return userRepository.findByUsername(username);
     }
 
